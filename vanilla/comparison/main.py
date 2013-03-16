@@ -145,7 +145,7 @@ def main():
         for c in listOfCiphers:
             
             if not args.no_bl_heuristic:
-                print '  > Heuristic : Blacklisting classic values for ' + c.getName() + ' (disable it with --no-bl-heuristic)'
+                #print '  > Heuristic : Blacklisting classic values for ' + c.getName() + ' (disable it with --no-bl-heuristic)'
             
                 bl = heuristics.blacklistedValues(ldf, c)
 
@@ -204,15 +204,15 @@ def compare(ldf, refCipher):
                 ciphertext = refCipher.encipher(i1,i2)
 
                 print "\n\n!! Identification successful: " + refCipher.getName() + " encryption with:" 
-                print ' ==> Plain text (' + str(len(i1)/2) + ' bytes) : 0x' + i1[0:512] + '...'
+                print '\n ==> Plain text (' + str(len(i1)/2) + ' bytes) : 0x' + i1[0:512] + '...'
 
                 if not refCipher.hashFunction:
-                    print ' ==> Key ('+ str(len(i2)/2) +' bytes) : 0x' + i2[0:512] + '...'
+                    print '\n ==> Key ('+ str(len(i2)/2) +' bytes) : 0x' + i2[0:512]
                 if not refCipher.hashFunction:
-                    print ' ==> Encrypted text (' + str(len(ciphertext)/2) + ' bytes) : 0x' + ciphertext[0:512] + '...'
+                    print '\n ==> Encrypted text (' + str(len(ciphertext)/2) + ' bytes) : 0x' + ciphertext[0:512] + '...'
                     return True
                 else:
-                    print ' ==> Hash (' + str(len(ciphertext)/2) + ' bytes) : 0x' + ciphertext[0:512] + '...'
+                    print '\n ==> Hash (' + str(len(ciphertext)/2) + ' bytes) : 0x' + ciphertext[0:512] + '...'
                     # We continue to test hash functions, because there could be several good inputs
                     # (cf. md5_core.py for an example)
                     hashFunctionFound = 1
@@ -223,9 +223,9 @@ def compare(ldf, refCipher):
                     plaintext = refCipher.decipher(i1,i2)
 
                     print "\n\n!! Identification successful: " + refCipher.getName() + " decryption with:"
-                    print ' ==> Encrypted text (' + str(len(i1)/2) + ' bytes) : 0x' + i1[0:512] + '...'
-                    print ' ==> Key ('+ str(len(i2)/2) +' bytes) : 0x' + i2[0:512] + '...'
-                    print ' ==> Decrypted text (' + str(len(plaintext)/2) + ' bytes) : 0x' + plaintext[0:512] + '...'
+                    print '\n ==> Encrypted text (' + str(len(i1)/2) + ' bytes) : 0x' + i1[0:512] + '...'
+                    print '\n ==> Key ('+ str(len(i2)/2) +' bytes) : 0x' + i2[0:512] + '...'
+                    print '\n ==> Decrypted text (' + str(len(plaintext)/2) + ' bytes) : 0x' + plaintext[0:512] + '...'
                     return True
 
     if hashFunctionFound:
